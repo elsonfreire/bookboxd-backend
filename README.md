@@ -1,59 +1,61 @@
+---
+
 # bookboxd-backend
 
-## 📦 Requisitos
+## 📦 Requirements
 
-- Node.js v18+ (para desenvolvimento local)
-- Docker (para rodar em container)
+* Node.js v18+ (for local development)
+* Docker (to run in a container)
 
 ---
 
-## 🐳 Execução com Docker
+## 🐳 Running with Docker
 
-1. **(Opcional)** Instale localmente as definições de tipos do Node para o seu editor:
+1. **(Optional)** Install Node type definitions locally for your editor:
 
    ```bash
    npm install --save-dev @types/node
    ```
 
-2. **Build** da imagem Docker:
+2. **Build** the Docker image:
 
    ```bash
    docker build -t bookboxd-backend .
    ```
 
-3. **Run** do container:
+3. **Run** the container:
 
    ```bash
-   docker run -p 3000:3000 --name bookbox-api bookboxd-backend
+   docker run -p 3000:3000 --name bookboxd-api bookboxd-backend
    ```
 
-> A API estará disponível em `http://localhost:3000`.
+> The API will be available at `http://localhost:3000`.
 
-### 🚀 Parando e Removendo o Container
+### 🚀 Stopping and Removing the Container
 
-Para parar:
+To stop:
 
 ```bash
-docker stop bookbox-api
+docker stop bookboxd-api
 ```
 
-Para remover:
+To remove:
 
 ```bash
-docker rm bookbox-api
+docker rm bookboxd-api
 ```
 
 ---
 
-## 🔧 Variáveis de Ambiente
+## 🔧 Environment Variables
 
-- `PORT` (padrão: `3000`) — Porta em que a aplicação irá escutar.
+- `PORT` (default: `3000`) — Port the application will listen on.
 
 ---
 
-## 📝 Scripts Úteis (no `package.json`)
+## 📝 Useful Scripts (in `package.json`)
 
-- `npm run build`: compila o TypeScript para JavaScript em `dist/`
-- `npm start`: executa `node dist/server.js`
+- `npm run build`: compiles TypeScript to JavaScript in `dist/`
+- `npm start`: runs `node dist/server.js`
 
 ---
