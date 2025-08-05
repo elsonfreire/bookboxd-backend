@@ -1,5 +1,3 @@
----
-
 # bookboxd-backend
 
 ## 📦 Requirements
