@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  db:
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USERNAME=bookboxd
+      - POSTGRESQL_PASSWORD=bookboxd
+      - POSTGRESQL_DATABASE=bookboxd
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - bookboxd_pg_data:/bitnami/postgresql
+    ports:
+      - "5433:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+    environment:
+      DATABASE_URL: postgres://bookboxd:bookboxd@db:5432/bookboxd
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    command:
+      [
+        "nodemon",
+        "--legacy-watch",
+        "--watch",
+        "src",
+        "--ext",
+        "ts,js,json",
+        "src/server.ts"
+      ]
+
+volumes:
+  bookboxd_pg_data:
+
+
+  

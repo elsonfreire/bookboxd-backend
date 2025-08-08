@@ -1,7 +1,16 @@
 FROM node:22-slim
 WORKDIR /usr/src/app
+
+RUN apt-get update -y && \
+    apt-get install -y openssl
+
+COPY package*.json ./
+RUN npm install && \
+    npm install -g nodemon
+
+COPY prisma ./prisma
+RUN npx prisma generate
+
 COPY . .
-RUN npm install 
-RUN npm run build
+
 EXPOSE 3000
-CMD ["node","dist/server.js"]
