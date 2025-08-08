@@ -28,7 +28,7 @@ export const create = async (data: {
 
 export const update = async (
   id: number,
-  data: { username?: string; email: string; password?: string }
+  data: { username?: string; email?: string; password?: string }
 ) => {
   const user = await prisma.user.update({ where: { id }, data });
 
