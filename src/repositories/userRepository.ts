@@ -1,33 +1,42 @@
-type User = {
-  id: number;
+import { prisma } from "../config/prisma";
+
+export const getAll = async () => {
+  const users = await prisma.user.findMany();
+
+  return users;
+};
+
+export const getById = async (id: number) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  return user;
+};
+
+export const create = async (data: {
   username: string;
   email: string;
   password: string;
+}) => {
+  const user = await prisma.user.create({
+    data,
+  });
+
+  return user;
 };
 
-class UserRepository {
-  private users: User[] = [
-    { id: 1, username: "Elson",  email: "elsonfreirefilho@gmail.com", password: "1234" },
-    { id: 2, username: "Arthur", email: "arthurrego@gmail.com", password: "1234" },
-    { id: 3, username: "Luigi",  email: "luigipeixoto@gmail.com", password: "1234" }
-  ];
+export const update = async (
+  id: number,
+  data: { username?: string; email?: string; password?: string }
+) => {
+  const user = await prisma.user.update({ where: { id }, data });
 
-  findAll(): User[] {
-    return [...this.users];
-  }
+  return user;
+};
 
-  findById(id: number): User | undefined {
-    return this.users.find(u => u.id === id);
-  }
+export const remove = async (id: number) => {
+  const user = await prisma.user.delete({ where: { id } });
 
-  create(data: Omit<User, "id">): User {
-    const newUser: User = {
-      id: this.users.length + 1,
-      ...data
-    };
-    this.users.push(newUser);
-    return newUser;
-  }
-}
-
-export default new UserRepository();
+  return user;
+};
