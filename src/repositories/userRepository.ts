@@ -14,7 +14,11 @@ export const getById = async (id: number) => {
   return user;
 };
 
-export const create = async (data: { username: string; password: string }) => {
+export const create = async (data: {
+  username: string;
+  email: string;
+  password: string;
+}) => {
   const user = await prisma.user.create({
     data,
   });
@@ -24,7 +28,7 @@ export const create = async (data: { username: string; password: string }) => {
 
 export const update = async (
   id: number,
-  data: { username?: string; password?: string }
+  data: { username?: string; email?: string; password?: string }
 ) => {
   const user = await prisma.user.update({ where: { id }, data });
 
