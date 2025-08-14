@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import userRepository from "../repositories/userRepository";
+import * as userRepository from "../repositories/userRepository";
 
 class UserController {
   public getAllUsers(req: Request, res: Response): void {
-    const users = userRepository.findAll();
+    const users = userRepository.getAll ();
     res.status(200).json({data: users});
   }
 
   public getUserById(req: Request, res: Response): void {
     const userId = parseInt(req.params.id, 10);
-    const user = userRepository.findById(userId);
+    const user = userRepository.getById(userId);
 
     if (user) {
       res.status(200).json({data: user});
